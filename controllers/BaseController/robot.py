@@ -2,6 +2,8 @@ from controller import Robot
 from controller.motor import Motor
 
 import numpy as np
+from msgStructs import LaserScan
+
 
 def normalize_angle(angle):
     while angle > np.pi:
@@ -51,6 +53,10 @@ class MyRobot:
         self.L = 0.178       # [m]
         
         
+        # ----- LiDAR -----
+        self.lidar = self.robot.getLidar("LDS-01")
+        self.lidar.enable(self.timestep)        
+        
     def update_odom(self):
         
         current_left = self.left_sensor.getValue()
@@ -88,4 +94,11 @@ class MyRobot:
         
         self.setMotorVelocities(w_l, w_r)                
     
+    def getLaserScan(self):
+        
+        ranges = self.lidar.getLayerRangeImage(0)
+        fov = self.lidar.getFov()
+        n = self.lidar.getHorizontalResolution()
+        msg = LaserScan(fov = fov, n = n, ranges = ranges)
+        return msg
         

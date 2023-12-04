@@ -8,8 +8,8 @@ EXTERNPROTO "../protos/TurtleBot3Burger.proto"
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.5773502691896257 0.5773502691896257 0.5773502691896257 2.0944
-  position -1.4751836544296655e-05 -1.4751878257032312e-05 4.782969000022357
+  orientation -0.37495731099988594 0.40368408472006473 0.8345335072191281 1.6776618862426205
+  position -0.36755446960952687 -2.86898853438932 3.4847489905479576
 }
 TexturedBackground {
 }
@@ -17,12 +17,78 @@ TexturedBackgroundLight {
 }
 RectangleArena {
   floorSize 3 2
+  wallHeight 0.4
 }
 Pose {
   translation -1.5 -1 0
   children [
     TurtleBot3Burger {
-      translation 0.25 0.25 0
+      hidden translation_8 0 -0.08 0.033
+      hidden rotation_8 0 -0.9999999999999999 0 1.570795995037458
+      hidden translation_9 0 0.08 0.033
+      hidden rotation_9 -0.7071047833911346 7.261630655079611e-15 -0.7071087789763163 3.141588
+      hidden translation_10 -0.081 0 0.004
+      translation 0.249999988685631 0.24999999992900168 -0.00015336582113036068
+      rotation -0.05115368621251666 -0.9986907921301256 4.584074482285501e-05 0.0018350374899228211
+      controller "BaseController"
     }
   ]
+}
+Solid {
+  translation 0 0 0.05
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.937255 0.160784 0.160784
+        }
+      }
+      geometry Box {
+        size 0.4 0.05 0.4
+      }
+    }
+  ]
+  boundingObject Box {
+    size 0.1 0.1 0.1
+  }
+}
+Solid {
+  translation -0.79 0 0.05
+  rotation 0 0 1 1.5708
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.937255 0.160784 0.160784
+        }
+      }
+      geometry Box {
+        size 0.4 0.05 0.4
+      }
+    }
+  ]
+  name "solid(1)"
+  boundingObject Box {
+    size 0.1 0.1 0.1
+  }
+}
+Solid {
+  translation 0.94 6.35464e-06 0.05
+  rotation 0 0 1 1.5708
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.937255 0.160784 0.160784
+        }
+      }
+      geometry Box {
+        size 0.4 0.05 0.4
+      }
+    }
+  ]
+  name "solid(2)"
+  boundingObject Box {
+    size 0.1 0.1 0.1
+  }
 }
