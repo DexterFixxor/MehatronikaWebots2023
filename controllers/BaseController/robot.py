@@ -101,4 +101,11 @@ class MyRobot:
         n = self.lidar.getHorizontalResolution()
         msg = LaserScan(fov = fov, n = n, ranges = ranges)
         return msg
-        
+    
+    
+    @property
+    def maxMotorVelocities(self) -> tuple:
+        """ Returns tuple of maximum velocities of the motors as (wr_max, wl_max)"""
+        return self.right_motor.getMaxVelocity(), self.left_motor.getMaxVelocity()
+    
+

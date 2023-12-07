@@ -4,12 +4,14 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/project
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/RectangleArena.proto"
 EXTERNPROTO "../protos/TurtleBot3Burger.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/devices/robotis/protos/RobotisLds01.proto"
 
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.37495731099988594 0.40368408472006473 0.8345335072191281 1.6776618862426205
-  position -0.36755446960952687 -2.86898853438932 3.4847489905479576
+  orientation -0.442064182203451 0.44818570021528253 0.7769870249465758 1.8071501404582453
+  position -0.20767323702488644 -1.4998027901136668 2.731280273984578
+  follow "TurtleBot3Burger:LDS-01"
 }
 TexturedBackground {
 }
@@ -23,14 +25,14 @@ Pose {
   translation -1.5 -1 0
   children [
     TurtleBot3Burger {
-      hidden translation_8 0 -0.08 0.033
-      hidden rotation_8 0 -0.9999999999999999 0 1.570795995037458
-      hidden translation_9 0 0.08 0.033
-      hidden rotation_9 -0.7071047833911346 7.261630655079611e-15 -0.7071087789763163 3.141588
-      hidden translation_10 -0.081 0 0.004
-      translation 0.249999988685631 0.24999999992900168 -0.00015336582113036068
-      rotation -0.05115368621251666 -0.9986907921301256 4.584074482285501e-05 0.0018350374899228211
-      controller "BaseController"
+      translation 0.25 0.25 0
+      rotation 0 0 1 0
+      controller "<extern>"
+      extensionSlot [
+        RobotisLds01 {
+          noise 0
+        }
+      ]
     }
   ]
 }
@@ -53,26 +55,6 @@ Solid {
   }
 }
 Solid {
-  translation -0.79 0 0.05
-  rotation 0 0 1 1.5708
-  children [
-    Shape {
-      appearance Appearance {
-        material Material {
-          diffuseColor 0.937255 0.160784 0.160784
-        }
-      }
-      geometry Box {
-        size 0.4 0.05 0.4
-      }
-    }
-  ]
-  name "solid(1)"
-  boundingObject Box {
-    size 0.1 0.1 0.1
-  }
-}
-Solid {
   translation 0.94 6.35464e-06 0.05
   rotation 0 0 1 1.5708
   children [
@@ -90,5 +72,25 @@ Solid {
   name "solid(2)"
   boundingObject Box {
     size 0.1 0.1 0.1
+  }
+}
+Solid {
+  translation -0.82 -1.10152e-07 0.05
+  rotation 0 0 1 1.5708
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.937255 0.160784 0.160784
+        }
+      }
+      geometry Box {
+        size 0.4 0.05 0.4
+      }
+    }
+  ]
+  name "solid(1)"
+  boundingObject Box {
+    size 0.4 0.05 0.4
   }
 }
