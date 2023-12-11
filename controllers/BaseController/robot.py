@@ -1,6 +1,6 @@
 from controller import Robot
 from controller.motor import Motor
-
+from msgStructs import LidarMsg
 import numpy as np
 
 def normalize_angle(angle):
@@ -51,6 +51,11 @@ class MyRobot:
         self.L = 0.178       # [m]
         
         
+        # -----
+        self.lidar = self.robot.getLidar("LDS-01")
+        self.lidar.enable(self.timestep)
+        
+        
     def update_odom(self):
         
         current_left = self.left_sensor.getValue()
@@ -86,6 +91,27 @@ class MyRobot:
         w_r = w_lin + w_rot
         w_l = w_lin - w_rot
         
-        self.setMotorVelocities(w_l, w_r)                
+        self.setMotorVelocities(w_l, w_r)   
+        
+        
+    def getLidarData(self) -> LidarMsg:
+        ranges = np.array(self.lidar.getLayerRangeImage(0))
+        n_samples = self.lidar.getHorizontalResolution()
+        fov = self.lidar.getFov()
+        
+        delta_phi = fov/n_samples
+        
+        angles = np.pi - np.arange(0, fov, delta_phi)
+        
+        msg = LidarMsg(
+            angles =angles,
+            ranges = ranges,
+            fov = fov,
+            n_samples= n_samples
+        )
+        
+        return msg
+        
+                     
     
         
