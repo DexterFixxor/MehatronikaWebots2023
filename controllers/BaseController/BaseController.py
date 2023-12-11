@@ -28,7 +28,7 @@ if __name__ == "__main__":
     x_ref, y_ref, theta_ref = targets.pop(0)
 
     fig, ax = plt.subplots(1)
-    ax.imshow(map.grid)
+    ax.imshow(map.get_map())
 
     while robot.step() != -1:
         robot.update_odom()
@@ -44,10 +44,7 @@ if __name__ == "__main__":
         
         msg = robot.getLaserScan()
         
-        xs, ys = lidarMsgTCartesianSpace(robot.x, robot.y, robot.theta, msg.ranges, msg.angles)
-        
-        for x,y in zip(xs, ys):   
-            map.addObstacle(x, y)
+        map.update_map((robot.x, robot.y, robot.theta), msg.ranges, msg.angles)
            
         # ax.scatter(xs, ys)
         # plt.show(block=False)
