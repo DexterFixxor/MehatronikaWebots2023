@@ -13,7 +13,7 @@ if __name__ == "__main__":
         theta_ini= 0.0
     )
     
-    map = GridMap(3.0, 2.0, 0.05)
+    # map = GridMap(3.0, 2.0, 0.05)
     
     target1 = (1.25, 0.25, np.pi/2)
     target2 = (1.25, 1.25, np.pi)
@@ -23,8 +23,6 @@ if __name__ == "__main__":
     targets = [target2, target4]
     
     x_ref, y_ref, theta_ref = targets.pop(0)
-
-    
 
     while robot.step() != -1:
         robot.update_odom()
@@ -41,12 +39,12 @@ if __name__ == "__main__":
         
         lidar_msg = robot.getLidarData()
 
-        # x_s, y_s = transformLidarData(robot.x, robot.y, robot.theta, lidar_msg.ranges, lidar_msg.angles)
+        x_s, y_s = transformLidarData(robot.x, robot.y, robot.theta, lidar_msg.ranges, lidar_msg.angles)
         
         
-        map.update_map(robot.x, robot.y, robot.theta, lidar_msg.ranges, lidar_msg.angles)
-        plt.imshow(map.grid)
-        # plt.scatter(x_s, y_s)
+        # map.update_map(robot.x, robot.y, robot.theta, lidar_msg.ranges, lidar_msg.angles)
+        # plt.imshow(map.grid)
+        plt.scatter(x_s, y_s)
         plt.show(block=False)
         plt.pause(0.001)
         
